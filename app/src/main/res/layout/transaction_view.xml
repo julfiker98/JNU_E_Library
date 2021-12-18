@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/book_nameTv_view"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:text="Book Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/st_nameTv_view"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:text="Student Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/transTypeTv_view"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:text="Transaction Type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

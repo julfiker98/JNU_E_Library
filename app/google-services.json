@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "982639604430",
+    "project_id": "jnu-library",
+    "storage_bucket": "jnu-library.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:982639604430:android:d88b9e2e7f9b1fccf1d69f",
+        "android_client_info": {
+          "package_name": "com.jnu.jnuelibrary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "982639604430-8goobp75o9vo084t5lsqj6iun0a91k99.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzR_5_laSA5C855ay_9O3YwTDBMHMWt20"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "982639604430-8goobp75o9vo084t5lsqj6iun0a91k99.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

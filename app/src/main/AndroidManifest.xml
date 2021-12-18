@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.jnu.jnuelibrary" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.JNUELibrary"
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".Librarian.GenaratePdfActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Librarian.TransactionListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Librarian.ReturnRequestListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Student.MyBorrowListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Librarian.BorrowListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Librarian.ScannViewL"
+            android:exported="true" />
+        <activity
+            android:name=".Librarian.ScanStudentProfileActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Librarian.BorrowRequestListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Librarian.DashboardActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Student.ScanActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Student.ScannerView"
+            android:exported="true" />
+        <activity
+            android:name=".Librarian.LibrarianLoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Student.StudentLoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Student.MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.JNUELibrary.NoActionBar" />
+    </application>
+
+</manifest>
