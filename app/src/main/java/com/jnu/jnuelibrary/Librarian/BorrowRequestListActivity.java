@@ -30,6 +30,7 @@ public class BorrowRequestListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_borrow_request_list);
+        this.setTitle("Borrow Request List");
 
         recyclerView = findViewById(R.id.recyclerView_id);
         borrowList = new ArrayList<>();

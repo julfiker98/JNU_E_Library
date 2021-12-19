@@ -1,66 +1,63 @@
-package com.jnu.jnuelibrary.Librarian;
-
-import android.os.Bundle;
-import android.widget.Toast;
+package com.jnu.jnuelibrary;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Bundle;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.jnu.jnuelibrary.Adapter.BorrowAdapter;
-import com.jnu.jnuelibrary.Adapter.ReturnAdapter;
-import com.jnu.jnuelibrary.Adapter.StudentBorrowAdapter;
-import com.jnu.jnuelibrary.Model.BorrowModel;
+import com.jnu.jnuelibrary.Adapter.AdapterBookList;
+import com.jnu.jnuelibrary.Adapter.AdapterBorrowList;
+import com.jnu.jnuelibrary.Model.ModelBookList;
 import com.jnu.jnuelibrary.Model.ModelBorrowList;
-import com.jnu.jnuelibrary.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class ReturnRequestListActivity extends AppCompatActivity {
-
+public class BookListActivity extends AppCompatActivity {
     RecyclerView recyclerView;
-    List<ModelBorrowList> returnList;
-    ReturnAdapter returnAdapter;
+    List<ModelBookList> bookList;
+    AdapterBookList adapterBookList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_return_request_list);
-        this.setTitle("Return Request List");
+        setContentView(R.layout.activity_book_list);
+        this.setTitle("Book List");
 
         recyclerView = findViewById(R.id.recyclerView_id);
-        returnList = new ArrayList<>();
+        bookList = new ArrayList<>();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
-        getAllReturnRequest();
+        getBookList();
 
     }
 
-    private void getAllReturnRequest() {
-        DatabaseReference ref_borrow = FirebaseDatabase.getInstance().getReference("return_request");
+    private void getBookList() {
+        DatabaseReference ref_borrow = FirebaseDatabase.getInstance().getReference("bookList");
         ref_borrow.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
-                    returnList.clear();
+                    bookList.clear();
                     for (DataSnapshot ds:snapshot.getChildren()){
-                        ModelBorrowList modelBorrowList = ds.getValue(ModelBorrowList.class);
-                        returnList.add(modelBorrowList);
+                        ModelBookList bookListModel = ds.getValue(ModelBookList.class);
+                        bookList.add(bookListModel);
                     }
-                    returnAdapter = new ReturnAdapter(getApplicationContext(),returnList);
-                    recyclerView.setAdapter(returnAdapter);
-                    returnAdapter.notifyDataSetChanged();
+
+                    adapterBookList = new AdapterBookList(getApplicationContext(),bookList);
+                    recyclerView.setAdapter(adapterBookList);
+                    adapterBookList.notifyDataSetChanged();
                 }
             }
 
@@ -69,8 +66,5 @@ public class ReturnRequestListActivity extends AppCompatActivity {
 
             }
         });
-
     }
-
-
 }

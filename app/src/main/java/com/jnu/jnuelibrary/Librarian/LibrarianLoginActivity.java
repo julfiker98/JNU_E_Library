@@ -15,8 +15,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.jnu.jnuelibrary.databinding.ActivityLibrarianLoginBinding;
 
 import java.util.HashMap;
@@ -24,6 +27,10 @@ import java.util.HashMap;
 public class LibrarianLoginActivity extends AppCompatActivity {
     private ActivityLibrarianLoginBinding binding;
     private FirebaseAuth mAuth;
+
+    String email_l="";
+    String pass_l="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +50,8 @@ public class LibrarianLoginActivity extends AppCompatActivity {
         binding.signUpBtn.setOnClickListener(v->{
             signUpLibrarian();
         });
+
+        getLibrarianLoginInfo();
     }
 
     private void signUpLibrarian() {
@@ -112,6 +121,18 @@ public class LibrarianLoginActivity extends AppCompatActivity {
         String email = binding.emailEtLogin.getText().toString();
         String password = binding.passEtLogin.getText().toString();
 
+        if (email_l.equals(email)&&pass_l.equals(password)){
+            SharedPreferences.Editor editor = getSharedPreferences("jnu", MODE_PRIVATE).edit();
+            editor.putString("email",email);
+            editor.putString("tag","lb");
+            editor.apply();
+
+            Toast.makeText(LibrarianLoginActivity.this, "Login Success !!", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(LibrarianLoginActivity.this,DashboardActivity.class));
+            finish();
+        }
+
+        /*
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -129,6 +150,28 @@ public class LibrarianLoginActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(LibrarianLoginActivity.this, "Failed to Login !", Toast.LENGTH_SHORT).show();
                 }
+
+            }
+        }); */
+    }
+
+    public void getLibrarianLoginInfo(){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                     email_l =snapshot.child("librarian_email").getValue(String.class);
+                     pass_l =snapshot.child("librarian_pass").getValue(String.class);
+
+                     if (!email_l.isEmpty() && !pass_l.isEmpty()){
+                         binding.signinBtnId.setEnabled(true);
+                     }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });

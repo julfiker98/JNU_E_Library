@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,6 +27,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+import com.jnu.jnuelibrary.BookListActivity;
 import com.jnu.jnuelibrary.R;
 import com.jnu.jnuelibrary.databinding.ActivityMainBinding;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
@@ -36,14 +39,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public static String id="";
 
+    FirebaseAuth mAuth;
+    FirebaseUser currentUser;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
         setSupportActionBar(binding.appBarMain.toolbar);
         Toolbar toolbar = findViewById(R.id.toolbar);
+
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
 
 
         //Navigation Drawer finding
@@ -62,8 +74,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         sessionTv = findViewById(R.id.sessionTv);
         qrIv = findViewById(R.id.qrIv_id);
 
+        loadStudentInfo();
 
-    loadStudentInfo();
 
     }
 
@@ -93,6 +105,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         if (id==R.id.nav_borrow){
             startActivity(new Intent(getApplicationContext(),MyBorrowListActivity.class));
+        }
+        if (id==R.id.nav_books){
+            startActivity(new Intent(getApplicationContext(), BookListActivity.class));
+        }
+
+        if (id==R.id.nav_return){
+            Toast.makeText(getApplicationContext(), "Coming soon....", Toast.LENGTH_SHORT).show();
+        }
+        if (id==R.id.nav_transaction){
+            Toast.makeText(getApplicationContext(), "Coming soon....", Toast.LENGTH_SHORT).show();
+        }
+        if (id==R.id.nav_wishlist){
+            Toast.makeText(getApplicationContext(), "Coming soon....", Toast.LENGTH_SHORT).show();
+        }
+        if (id==R.id.nav_review){
+            Toast.makeText(getApplicationContext(), "Coming soon....", Toast.LENGTH_SHORT).show();
+        }
+        if (id==R.id.nav_announcement){
+            Toast.makeText(getApplicationContext(), "Coming soon....", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -138,6 +169,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     getSupportActionBar().setTitle(name);
 
                     generateQr(s);
+
+                    updateNavHeader(name,email);
                 }
             }
 
@@ -164,6 +197,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
        }
 
    }
+
+   public void updateNavHeader(String name, String email){
+
+       NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+       View headerView = navigationView.getHeaderView(0);
+       TextView nav_userNameTv = headerView.findViewById(R.id.nav_usernameTv_id);
+       TextView nav_emailTv = headerView.findViewById(R.id.nav_emailTv_id);
+       ImageView nav_imageView = headerView.findViewById(R.id.nav_imageView_id);
+
+       nav_userNameTv.setText(name);
+       nav_emailTv.setText(email);
+
+   }
+
 
 
 }

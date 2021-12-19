@@ -31,6 +31,7 @@ public class TransactionListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_list);
+        this.setTitle("Transaction List");
 
         recyclerView = findViewById(R.id.recyclerView_id);
         transactionList = new ArrayList<>();

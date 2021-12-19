@@ -9,55 +9,84 @@
     android:padding="10dp"
     tools:context=".Librarian.GenaratePdfActivity">
 
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
 
-  <EditText
-      android:textColor="@color/black"
-      android:hint="Book Name"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"/>
-  <EditText
-      android:textColor="@color/black"
-      android:hint="Writer Name"
-      android:layout_marginTop="5dp"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"/>
-  <EditText
-      android:textColor="@color/black"
-      android:hint="Book Type"
-      android:layout_marginTop="5dp"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"/>
-  <EditText
-      android:textColor="@color/black"
-      android:hint="Serial No"
-      android:layout_marginTop="5dp"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"/>
-  <EditText
-      android:textColor="@color/black"
-      android:hint="ISBN No"
-      android:layout_marginTop="5dp"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"/>
-  <EditText
-      android:textColor="@color/black"
-      android:hint="Book Link"
-      android:layout_marginTop="5dp"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+      <EditText
+          android:id="@+id/book_nameET_id"
+          android:textColor="@color/black"
+          android:hint="Book Name"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+      <EditText
+          android:id="@+id/writer_nameET_id"
+          android:textColor="@color/black"
+          android:hint="Writer Name"
+          android:layout_marginTop="5dp"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+      <EditText
+          android:id="@+id/book_typeEt_id"
+          android:textColor="@color/black"
+          android:hint="Book Type"
+          android:layout_marginTop="5dp"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+      <EditText
+          android:id="@+id/serial_noET_id"
+          android:textColor="@color/black"
+          android:hint="Serial No"
+          android:layout_marginTop="5dp"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+      <EditText
+          android:id="@+id/isbn_noET_id"
+          android:textColor="@color/black"
+          android:hint="ISBN No"
+          android:layout_marginTop="5dp"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+      <EditText
+          android:id="@+id/linkET_id"
+          android:textColor="@color/black"
+          android:hint="Book Link"
+          android:layout_marginTop="5dp"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
 
-  <Button
-      android:text="Generate QR"
-      android:textAllCaps="false"
-      android:layout_gravity="center"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"/>
-  <Button
-      android:text="Generate PDF"
-      android:textAllCaps="false"
-      android:layout_gravity="center"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"/>
+      <ImageView
+          android:id="@+id/qrIv_id"
+          android:visibility="gone"
+          android:layout_marginTop="5dp"
+          android:layout_marginBottom="5dp"
+          android:layout_gravity="center"
+          android:layout_width="200dp"
+          android:layout_height="200dp"/>
+
+
+      <Button
+          android:id="@+id/generateQrBtn_id"
+          android:text="Generate QR"
+          android:textAllCaps="false"
+          android:layout_gravity="center"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"/>
+      <Button
+          android:id="@+id/generatePdfBtn_id"
+          android:text="Generate PDF"
+          android:textAllCaps="false"
+          android:layout_gravity="center"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+  </ScrollView>
 
 
 

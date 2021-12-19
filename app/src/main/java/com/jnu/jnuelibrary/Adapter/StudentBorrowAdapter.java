@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class StudentBorrowAdapter extends RecyclerView.Adapter<StudentBorrowAdapter.Myholder> {
-    String st_name,book_name,serial_no,st_id;
+    String st_name,book_name,serial_no,st_id,time;
     Context context;
     List<ModelBorrowList> myBorrowList;
 
@@ -46,6 +46,8 @@ public class StudentBorrowAdapter extends RecyclerView.Adapter<StudentBorrowAdap
         book_name = myBorrowList.get(position).getBook_name();
         serial_no = myBorrowList.get(position).getSerial_no();
         st_id = myBorrowList.get(position).getSt_id();
+        time = myBorrowList.get(position).getTime();
+
 
         holder.st_nameTv.setText("Student Name: "+st_name);
         holder.book_nameTv.setText("Book Name: "+book_name);

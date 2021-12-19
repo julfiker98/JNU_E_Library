@@ -32,6 +32,7 @@ public class MyBorrowListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_borrow_list);
+        this.setTitle("My Borrow Request");
 
         recyclerView = findViewById(R.id.recyclerView_id);
         myBorrowList = new ArrayList<>();

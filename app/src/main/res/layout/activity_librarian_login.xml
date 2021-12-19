@@ -35,6 +35,8 @@
         <Button
             android:id="@+id/signinBtn_id"
             android:text="Sign In"
+            android:textColor="@color/white"
+            android:enabled="false"
             android:backgroundTint="#43A047"
             android:layout_marginTop="10dp"
             android:layout_gravity="center"
@@ -43,6 +45,7 @@
         <Button
             android:id="@+id/goSignupBtn_id"
             android:text="Sign Up"
+            android:visibility="gone"
             android:backgroundTint="#F4511E"
             android:layout_marginTop="10dp"
             android:layout_gravity="center"

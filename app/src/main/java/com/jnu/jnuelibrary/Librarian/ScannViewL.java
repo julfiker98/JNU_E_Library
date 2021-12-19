@@ -139,6 +139,7 @@ public class ScannViewL extends AppCompatActivity implements ZXingScannerView.Re
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(getApplicationContext(), "Book Returned", Toast.LENGTH_SHORT).show();
+                deleteFromReturnList();
             }
         });
 
@@ -146,6 +147,15 @@ public class ScannViewL extends AppCompatActivity implements ZXingScannerView.Re
 
     }
 
+    private void deleteFromReturnList() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("return_request");
+        try {
+
+        }catch (Exception e){
+            ref.child(time).removeValue();
+        }
+
+    }
 
     private void saveToBorrow() {
         DatabaseReference ref_bor = FirebaseDatabase.getInstance().getReference("borrow_list");
@@ -161,13 +171,13 @@ public class ScannViewL extends AppCompatActivity implements ZXingScannerView.Re
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(getApplicationContext(), "Approved!", Toast.LENGTH_SHORT).show();
-                deleteRequest();
+                deleteFromBorrowRequest();
             }
         });
 
     }
 
-    private void deleteRequest() {
+    private void deleteFromBorrowRequest() {
         DatabaseReference ref_borrow = FirebaseDatabase.getInstance().getReference("borrow_request");
         ref_borrow.child(time).removeValue();
     }
