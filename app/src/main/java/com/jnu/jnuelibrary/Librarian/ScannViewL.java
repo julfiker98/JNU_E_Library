@@ -82,13 +82,13 @@ public class ScannViewL extends AppCompatActivity implements ZXingScannerView.Re
             tag =ScanStudentProfileActivity.tag;
             s_uid = ScanStudentProfileActivity.s_uid;
         }
-        if (tag.equals("return")){
 
+        if (tag.equals("return")){
 
             s1 = splite[0];
             s2 = splite[1];
             s3 = splite[2];
-            s4 = splite[3];
+            s4 = splite[3];//serial no
             s5 = splite[4];
             s6 = splite[5];
 
@@ -107,15 +107,14 @@ public class ScannViewL extends AppCompatActivity implements ZXingScannerView.Re
 
         if (s3.equals(st_id) && tag.equals("borrow")){
             ScanStudentProfileActivity.statusTv.setText("Borrowed!");
-            saveToBorrow();
             addToTransaction("Borrowed");
+            saveToBorrow();
+            updateBookList("0");
         }
         if (tag.equals("return") && serial_no.equals(s4.trim())){
             ScanStudentProfileActivity.statusTv.setText("Status: Returned!");
             addToTransaction("Return");
-
-        }else {
-            ScanStudentProfileActivity.statusTv.setText("Id not Matched!");
+            updateBookList("1");
         }
 
         onBackPressed();
@@ -138,8 +137,15 @@ public class ScannViewL extends AppCompatActivity implements ZXingScannerView.Re
         ref_transactions.child(timeStamp).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                Toast.makeText(getApplicationContext(), "Book Returned", Toast.LENGTH_SHORT).show();
-                deleteFromReturnList();
+               // Toast.makeText(getApplicationContext(), "Status: "+key, Toast.LENGTH_SHORT).show();
+                if (key.equals("return")){
+                    deleteFromReturnList();
+                }
+                if (key.equals("Borrowed")){
+                   // Toast.makeText(getApplicationContext(), "borrow time: "+time, Toast.LENGTH_SHORT).show();
+                    deleteFromBorrowRequest();
+                }
+
             }
         });
 
@@ -148,12 +154,15 @@ public class ScannViewL extends AppCompatActivity implements ZXingScannerView.Re
     }
 
     private void deleteFromReturnList() {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("return_request");
-        try {
 
-        }catch (Exception e){
-            ref.child(time).removeValue();
-        }
+        DatabaseReference ref_return = FirebaseDatabase.getInstance().getReference("return_request");
+        ref_return.child(time).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(getApplicationContext(), "Value Removed", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //Toast.makeText(getApplicationContext(), "return time: "+time, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -165,6 +174,7 @@ public class ScannViewL extends AppCompatActivity implements ZXingScannerView.Re
         hashMap.put("st_name",s1);
         hashMap.put("book_name",book_name);
         hashMap.put("st_id",st_id);
+        hashMap.put("serial_no",serial_no);
         hashMap.put("time",timeStamp);
 
         ref_bor.child(timeStamp).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -180,6 +190,14 @@ public class ScannViewL extends AppCompatActivity implements ZXingScannerView.Re
     private void deleteFromBorrowRequest() {
         DatabaseReference ref_borrow = FirebaseDatabase.getInstance().getReference("borrow_request");
         ref_borrow.child(time).removeValue();
+
+    }
+
+    private void updateBookList(String status) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("bookList");
+        HashMap<String,Object> hashMap = new HashMap<>();
+        hashMap.put("status",status);
+        ref.child(serial_no).updateChildren(hashMap);
     }
 
     @Override

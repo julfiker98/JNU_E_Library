@@ -5,10 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.jnu.jnuelibrary.Model.TransactionModel;
 import com.jnu.jnuelibrary.R;
 
@@ -34,10 +38,26 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         String st_name = transactionList.get(position).getSt_name();
         String book_name = transactionList.get(position).getBook_name();
         String transType = transactionList.get(position).getTransaction_type();
+        String time = transactionList.get(position).getTime();
 
         holder.st_nameTv.setText("Student Name: "+st_name);
         holder.book_nameTv.setText("Book Name: "+book_name);
         holder.transactionTv.setText("Transaction type: "+transType);
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                DatabaseReference ref_trns = FirebaseDatabase.getInstance().getReference("transactions");
+                ref_trns.child(time).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(context.getApplicationContext(), "Removed!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                return false;
+            }
+        });
 
 
     }

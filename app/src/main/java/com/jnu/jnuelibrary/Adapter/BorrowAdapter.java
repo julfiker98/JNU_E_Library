@@ -38,6 +38,7 @@ public class BorrowAdapter extends RecyclerView.Adapter<BorrowAdapter.Myholder> 
         String st_id = borrowList.get(position).getSt_id();
         String time = borrowList.get(position).getTimeStamp();
         String uid = borrowList.get(position).getUid();
+        String serial_no = borrowList.get(position).getSerial_no();
 
         holder.st_nameTv.setText("Student Name: "+st_name);
         holder.book_nameTv.setText("Book Name: "+book_name);
@@ -50,6 +51,7 @@ public class BorrowAdapter extends RecyclerView.Adapter<BorrowAdapter.Myholder> 
             intent.putExtra("st_id",st_id);
             intent.putExtra("book_name",book_name);
             intent.putExtra("uid",uid);
+            intent.putExtra("serial",serial_no);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             BorrowAdapter.this.context.startActivity(intent);
         });

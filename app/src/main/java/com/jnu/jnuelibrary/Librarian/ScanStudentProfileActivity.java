@@ -36,6 +36,7 @@ public class ScanStudentProfileActivity extends AppCompatActivity {
                 time = intent.getStringExtra("time");
                 book_name = intent.getStringExtra("book_name");
                 s_uid = intent.getStringExtra("uid");
+                serial_no = intent.getStringExtra("serial");
                 // String st3 = ScannViewL.s3;
 
             }if(tag.equals("return")){

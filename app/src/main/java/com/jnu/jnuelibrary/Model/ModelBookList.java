@@ -2,18 +2,19 @@ package com.jnu.jnuelibrary.Model;
 
 public class ModelBookList {
 
-    String book_name,writer_name,book_type,serial_no,isbn_no,book_link;
+    String book_name,writer_name,book_type,serial_no,isbn_no,book_link,status;
 
     public ModelBookList() {
     }
 
-    public ModelBookList(String book_name, String writer_name, String book_type, String serial_no, String isbn_no, String book_link) {
+    public ModelBookList(String book_name, String writer_name, String book_type, String serial_no, String isbn_no, String book_link, String status) {
         this.book_name = book_name;
         this.writer_name = writer_name;
         this.book_type = book_type;
         this.serial_no = serial_no;
         this.isbn_no = isbn_no;
         this.book_link = book_link;
+        this.status = status;
     }
 
     public String getBook_name() {
@@ -63,4 +64,14 @@ public class ModelBookList {
     public void setBook_link(String book_link) {
         this.book_link = book_link;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+
 }

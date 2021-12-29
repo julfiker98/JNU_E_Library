@@ -190,6 +190,7 @@
             android:layout_height="100dp"/>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/announcementCv_id"
             app:cardElevation="5dp"
             android:layout_margin="5dp"
             app:cardCornerRadius="10dp"
@@ -258,7 +259,7 @@
             android:layout_height="100dp"/>
 
         <androidx.cardview.widget.CardView
-            android:visibility="gone"
+            android:id="@+id/studentManagementCv_id"
             app:cardElevation="5dp"
             android:layout_margin="5dp"
             app:cardCornerRadius="10dp"
@@ -267,7 +268,7 @@
             android:layout_height="100dp">
 
             <RelativeLayout
-                android:background="#00897B"
+                android:background="#C0CA33"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -277,7 +278,7 @@
                     android:layout_centerVertical="true"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="Announcement"
+                    android:text="Student\nManagement"
                     android:textColor="@color/white"
                     android:textSize="20dp" />
             </RelativeLayout>

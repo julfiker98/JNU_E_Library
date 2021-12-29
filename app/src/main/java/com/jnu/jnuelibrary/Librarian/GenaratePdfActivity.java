@@ -48,8 +48,6 @@ public class GenaratePdfActivity extends AppCompatActivity {
 
     //Pdf Section
     Bitmap bmp,scalBitmap;
-    int pageWidth =595;
-    int pageHeight=842;
     Canvas canvas;
     Paint myPaint;
 
@@ -127,6 +125,7 @@ public class GenaratePdfActivity extends AppCompatActivity {
         hashMap.put("serial_no",serial_no);
         hashMap.put("isbn_no",isbn_no);
         hashMap.put("book_link",book_link);
+        hashMap.put("status","1");
 
         ref_bookList.child(serial_no).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
