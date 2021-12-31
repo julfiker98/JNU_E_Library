@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,6 +20,7 @@ import com.jnu.jnuelibrary.Adapter.AdapterBookList;
 import com.jnu.jnuelibrary.Adapter.AdapterBorrowList;
 import com.jnu.jnuelibrary.Model.ModelBookList;
 import com.jnu.jnuelibrary.Model.ModelBorrowList;
+import com.jnu.jnuelibrary.Student.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +49,8 @@ public class BookListActivity extends AppCompatActivity {
         netTv = findViewById(R.id.networkingTv_id);
 
         getBookList();
+
+       //Toast.makeText(getApplicationContext(), "Tag: "+ MainActivity.tag, Toast.LENGTH_SHORT).show();
 
         proTv.setOnClickListener(v->{
             Intent intent = new Intent(getApplicationContext(),CategoryWiseBookActivity.class);

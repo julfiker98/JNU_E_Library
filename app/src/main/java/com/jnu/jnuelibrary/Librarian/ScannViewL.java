@@ -138,7 +138,7 @@ public class ScannViewL extends AppCompatActivity implements ZXingScannerView.Re
             @Override
             public void onSuccess(Void unused) {
                // Toast.makeText(getApplicationContext(), "Status: "+key, Toast.LENGTH_SHORT).show();
-                if (key.equals("return")){
+                if (key.equals("Return")){
                     deleteFromReturnList();
                 }
                 if (key.equals("Borrowed")){
@@ -159,7 +159,7 @@ public class ScannViewL extends AppCompatActivity implements ZXingScannerView.Re
         ref_return.child(time).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                Toast.makeText(getApplicationContext(), "Value Removed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Return Request Removed", Toast.LENGTH_SHORT).show();
             }
         });
         //Toast.makeText(getApplicationContext(), "return time: "+time, Toast.LENGTH_SHORT).show();

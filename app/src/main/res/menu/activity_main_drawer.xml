@@ -5,6 +5,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_baseline_person_pin_24"
+            android:title="My Profile" />
+        <item
             android:id="@+id/nav_scan"
             android:icon="@drawable/ic_menu_camera"
             android:title="Scan Book" />
@@ -16,11 +20,11 @@
         <item
             android:id="@+id/nav_borrow"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="My Borrow Request List" />
+            android:title="My Borrow" />
         <item
             android:id="@+id/nav_return"
             android:icon="@drawable/ic_baseline_assignment_return_24"
-            android:title="My Return Request"/>
+            android:title="Return Book"/>
         <item
             android:id="@+id/nav_transaction"
             android:icon="@drawable/ic_menu_slideshow"

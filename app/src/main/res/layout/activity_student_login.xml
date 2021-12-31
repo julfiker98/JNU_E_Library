@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="5dp"
+    android:padding="10dp"
     tools:context=".Student.StudentLoginActivity">
 
     <LinearLayout
@@ -18,6 +18,7 @@
         <EditText
             android:id="@+id/emailEt_login"
             android:layout_marginTop="50dp"
+            android:background="@drawable/forget"
             android:hint="Enter Email"
             android:textSize="20dp"
             android:textColor="@color/black"
@@ -26,27 +27,35 @@
 
         <EditText
             android:id="@+id/passEt_login"
+            android:background="@drawable/forget"
             android:hint="Enter Password"
             android:textSize="20dp"
+            android:inputType="textPassword"
+            android:layout_marginTop="20dp"
             android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <Button
+        <TextView
             android:id="@+id/signinBtn_id"
             android:text="Sign In"
-            android:backgroundTint="#43A047"
-            android:layout_marginTop="10dp"
+            android:background="@drawable/button_bg1"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_marginTop="30dp"
             android:layout_gravity="center"
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"/>
-        <Button
+
+        <TextView
             android:id="@+id/goSignupBtn_id"
             android:text="Sign Up"
-            android:backgroundTint="#F4511E"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@drawable/button_bg2"
             android:layout_marginTop="10dp"
             android:layout_gravity="center"
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
@@ -57,17 +66,26 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+  <ImageView
+    android:id="@+id/profileIv_id"
+    android:src="@drawable/ic_baseline_person_pin_24"
+    android:layout_marginTop="10dp"
+    android:layout_gravity="center"
+    android:layout_width="150dp"
+    android:layout_height="150dp"/>
 
     <EditText
         android:id="@+id/nameEt_id"
+        android:background="@drawable/forget"
         android:hint="Enter Full Name"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <EditText
         android:id="@+id/emailEt_id"
         android:hint="Enter Email"
+        android:background="@drawable/forget"
         android:layout_marginTop="10dp"
         android:textSize="20dp"
         android:textColor="@color/black"
@@ -76,6 +94,8 @@
 
     <EditText
         android:id="@+id/idEt_id"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/forget"
         android:hint="Enter Student ID(ex: B986274682)"
         android:textSize="20dp"
         android:textColor="@color/black"
@@ -84,6 +104,8 @@
 
     <EditText
         android:id="@+id/sessionEt_id"
+        android:background="@drawable/forget"
+        android:layout_marginTop="10dp"
         android:hint="Enter Session"
         android:textSize="20dp"
         android:textColor="@color/black"
@@ -93,22 +115,25 @@
         android:id="@+id/passEt_id"
         android:hint="Enter Password"
         android:textSize="20dp"
+        android:inputType="textPassword"
+        android:background="@drawable/forget"
+        android:layout_marginTop="10dp"
         android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <Button
+    <TextView
         android:id="@+id/signUpBtn"
         android:text="Sign Up"
-        android:backgroundTint="#8E24AA"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="18dp"
+        android:background="@drawable/button_bg1"
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:layout_width="200dp"
         android:layout_height="wrap_content"/>
 
 </LinearLayout>
-
-
-
 
 </LinearLayout>

@@ -16,7 +16,7 @@
         android:src="@drawable/jnu_logo" />
 
     <TextView
-        android:text="Login"
+        android:text="Login Here"
         android:padding="3dp"
         android:textStyle="bold"
         android:gravity="center"
@@ -26,20 +26,27 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"/>
 
-    <Button
+    <TextView
         android:id="@+id/loginStBtn_id"
         android:text="Student Login"
-        android:backgroundTint="#43A047"
-        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:background="@drawable/button_bg1"
+        android:layout_marginTop="50dp"
         android:layout_gravity="center"
         android:layout_width="200dp"
         android:layout_height="wrap_content"/>
 
-    <Button
+
+    <TextView
         android:id="@+id/loginLbrBtn_id"
         android:text="Librarian Login"
-        android:backgroundTint="#FB8C00"
-        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:background="@drawable/button_bg2"
+        android:layout_marginTop="15dp"
         android:layout_gravity="center"
         android:layout_width="200dp"
         android:layout_height="wrap_content"/>

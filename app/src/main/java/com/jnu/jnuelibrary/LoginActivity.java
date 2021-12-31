@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import com.jnu.jnuelibrary.Librarian.DashboardActivity;
 import com.jnu.jnuelibrary.Librarian.LibrarianLoginActivity;
 import com.jnu.jnuelibrary.Student.MainActivity;
@@ -15,6 +17,8 @@ import com.jnu.jnuelibrary.databinding.ActivityLoginBinding;
 public class LoginActivity extends AppCompatActivity {
   private ActivityLoginBinding loginBinding;
 
+  public static String tag="";
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -24,7 +28,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
     SharedPreferences sharedPreferences = getSharedPreferences("jnu", Context.MODE_PRIVATE);
-    String tag = sharedPreferences.getString("tag", "No tag Found !");
+    tag = sharedPreferences.getString("tag", "No tag Found !");
+   // Toast.makeText(getApplicationContext(), ""+tag, Toast.LENGTH_SHORT).show();
 
     if (tag.equals("st")){
       startActivity(new Intent(getApplicationContext(), MainActivity.class));

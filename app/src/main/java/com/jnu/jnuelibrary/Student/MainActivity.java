@@ -5,15 +5,21 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Menu;
 import android.view.View;
+import android.webkit.CookieManager;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
@@ -37,6 +43,7 @@ import com.jnu.jnuelibrary.LoginActivity;
 import com.jnu.jnuelibrary.R;
 import com.jnu.jnuelibrary.databinding.ActivityMainBinding;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
@@ -52,7 +59,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
 
+    WebView webView;
 
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,11 +92,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         idTv = findViewById(R.id.idTv);
         sessionTv = findViewById(R.id.sessionTv);
         qrIv = findViewById(R.id.qrIv_id);
+        webView = findViewById(R.id.webview_id);
 
         SharedPreferences sharedPreferences = getSharedPreferences("jnu", Context.MODE_PRIVATE);
         tag = sharedPreferences.getString("tag", "No tag Found !");
 
+       // Toast.makeText(getApplicationContext(), "Tag: "+tag, Toast.LENGTH_SHORT).show();
+
+
         loadStudentInfo();
+        loadSite();
 
     }
 
@@ -160,6 +175,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         int id = item.getItemId();
+        if (id==R.id.nav_profile){
+            startActivity(new Intent(getApplicationContext(),StudentProfileActivity.class));
+        }
         if (id==R.id.nav_scan){
             startActivity(new Intent(getApplicationContext(),ScanActivity.class));
         }
@@ -199,13 +217,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        }
+        else if (webView.canGoBack()) {            webView.goBack();
+        }
+        else {
             super.onBackPressed();
         }
 
     }
-
-
 
   private void loadStudentInfo(){
         DatabaseReference ref_st = FirebaseDatabase.getInstance().getReference("studentList");
@@ -218,19 +237,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     String email = snapshot.child("email").getValue(String.class);
                     id = snapshot.child("id").getValue(String.class);
                     String session = snapshot.child("session").getValue(String.class);
-
-                    nameTv.setText(name);
-                    emailTv.setText(email);
-                    idTv.setText(id);
-                    sessionTv.setText(session);
-
-                    String s = name+"\n"+email+"\n"+id+"\n"+session;
+                    String profileUrl = snapshot.child("url").getValue(String.class);
 
                     getSupportActionBar().setTitle(name);
 
-                    generateQr(s);
-
-                    updateNavHeader(name,email);
+                    updateNavHeader(name,email,profileUrl);
                 }
             }
 
@@ -241,24 +252,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
    }
 
-   private void generateQr(String s){
 
-       MultiFormatWriter writer = new MultiFormatWriter();
-       try {
-           BitMatrix matrix = writer.encode(s, BarcodeFormat.QR_CODE,300,300);
-           BarcodeEncoder encoder = new BarcodeEncoder();
-           Bitmap bitmap = encoder.createBitmap(matrix);
-           qrIv.setImageBitmap(bitmap);
-          // InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-
-
-       } catch (WriterException e) {
-           e.printStackTrace();
-       }
-
-   }
-
-   public void updateNavHeader(String name, String email){
+   public void updateNavHeader(String name, String email,String url){
 
        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
        View headerView = navigationView.getHeaderView(0);
@@ -269,8 +264,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
        nav_userNameTv.setText(name);
        nav_emailTv.setText(email);
 
+       try {
+           Picasso.get().load(url).into(nav_imageView);
+       }catch (Exception e){
+           Toast.makeText(getApplicationContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+       }
+
    }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void loadSite() {
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setSupportZoom(true);
+
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setUseWideViewPort(true);
+
+        webView.setWebViewClient(new WebViewClient());
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webView.loadUrl("https://jnu.ac.bd/portal/getdata/9003");
+        cleanCookies();
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public static void cleanCookies(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            CookieManager.getInstance().removeAllCookies(null);
+        }
+        CookieManager.getInstance().flush();
+    }
 
 
 }

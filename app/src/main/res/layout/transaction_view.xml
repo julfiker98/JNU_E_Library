@@ -22,6 +22,11 @@
         android:text="Student Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
     <TextView
         android:id="@+id/transTypeTv_view"
         android:textColor="@color/black"
@@ -29,6 +34,14 @@
         android:text="Transaction Type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/deleteTV_view"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/ic_baseline_cancel_24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>
 
 
 </LinearLayout>

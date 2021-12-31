@@ -37,6 +37,8 @@ public class TransactionListActivity extends AppCompatActivity {
         transactionList = new ArrayList<>();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
