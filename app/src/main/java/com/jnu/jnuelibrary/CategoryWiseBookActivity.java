@@ -32,6 +32,7 @@ public class CategoryWiseBookActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_wise_book);
+        this.setTitle("Book List");
 
         recyclerView = findViewById(R.id.recyclerView_id);
 

@@ -20,6 +20,7 @@ public class NoticeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice);
+        this.setTitle("Notice Panel");
 
         noticeTv = findViewById(R.id.noticeTv_id);
         getNotice();

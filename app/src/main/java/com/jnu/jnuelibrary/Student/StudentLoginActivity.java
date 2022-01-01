@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -19,8 +18,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,10 +39,9 @@ import com.jnu.jnuelibrary.databinding.ActivityStudentLoginBinding;
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 
-public class StudentLoginActivity extends AppCompatActivity {
+public class StudentLoginActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     private ActivityStudentLoginBinding binding;
     private FirebaseAuth mAuth;
-
 
     private  static  final  int CAMERA_REQUEST_CODE=100;
     private  static  final  int STORAGE_REQUEST_CODE=200;
@@ -54,6 +53,9 @@ public class StudentLoginActivity extends AppCompatActivity {
     String storagePermission[];
     Uri image_rui=null;
     ProgressDialog pd;
+
+    private static final String[] item = {"Select Session","2014-2015", "2015-2016", "2016-2017","2017-2018","2018-2019","2019-2020","2020-2021","2021-2022"};
+    String sessionTxt="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,10 +87,35 @@ public class StudentLoginActivity extends AppCompatActivity {
             showImagePicDialog();
         });
 
+        //spinner
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(StudentLoginActivity.this,
+                android.R.layout.simple_spinner_item,item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.spinnerId.setAdapter(adapter);
+        binding.spinnerId.setOnItemSelectedListener(this);
 
     }
 
     private void signUp() {
+        String name = binding.nameEtId.getText().toString();
+        String email = binding.emailEtId.getText().toString();
+        String id = binding.idEtId.getText().toString();
+        String password = binding.passEtId.getText().toString();
+
+        if (image_rui==null){
+            Toast.makeText(getApplicationContext(), "Choose Profile Image", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (name.isEmpty()|| email.isEmpty() || id.isEmpty() || password.isEmpty()){
+            Toast.makeText(getApplicationContext(), "Please Enter all field", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (sessionTxt.equals("none")){
+            Toast.makeText(getApplicationContext(), "Select Session", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+
         pd.setMessage("Uploading Data...");
         pd.show();
 
@@ -117,22 +144,11 @@ public class StudentLoginActivity extends AppCompatActivity {
                             //url is received ..upload it to firebase database
                             // write farther code here...
 
-                            String name = binding.nameEtId.getText().toString();
-                            String email = binding.emailEtId.getText().toString();
-                            String id = binding.idEtId.getText().toString();
-                            String session = binding.sessionEtId.getText().toString();
-                            String password = binding.passEtId.getText().toString();
-
-                            if (name.isEmpty()){
-                                Toast.makeText(getApplicationContext(), "Enter Name", Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-
                             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        saveStudentInfo(name,email,id,session,password,downloadUri);
+                                        saveStudentInfo(name,email,id,sessionTxt,password,downloadUri);
 
                                     } else {
                                         // If sign in fails, display a message to the user.
@@ -201,12 +217,17 @@ public class StudentLoginActivity extends AppCompatActivity {
     }
 
     private void signIn() {
-        pd.setMessage("Signing...");
-        pd.show();
         //write signin code here...
         String email = binding.emailEtLogin.getText().toString();
         String password = binding.passEtLogin.getText().toString();
 
+        if (email.isEmpty() || password.isEmpty()){
+            Toast.makeText(getApplicationContext(), "Enter Email and Password!", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        pd.setMessage("Signing...");
+        pd.show();
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -216,7 +237,7 @@ public class StudentLoginActivity extends AppCompatActivity {
                     editor.putString("email",email);
                     editor.putString("tag","st");
                     editor.apply();
-                    pd.dismiss();
+                    pd.dismiss();///////
                     Toast.makeText(StudentLoginActivity.this, "Login Success !!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(StudentLoginActivity.this,MainActivity.class));
                     finish();
@@ -380,6 +401,56 @@ public class StudentLoginActivity extends AppCompatActivity {
         }
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+
+        switch (position) {
+            case 0:
+                // Whatever you want to happen when the first item gets selected
+                sessionTxt="none";
+                break;
+            case 1:
+                // Whatever you want to happen when the second item gets selected
+                sessionTxt="2014-2015";
+                break;
+            case 2:
+                // Whatever you want to happen when the thrid item gets selected
+                sessionTxt="2015-2016";
+                break;
+            case 3:
+                // Whatever you want to happen when the thrid item gets selected
+                sessionTxt="2016-2017";
+                break;
+
+            case 4:
+                // Whatever you want to happen when the thrid item gets selected
+                sessionTxt="2017-2018";
+                break;
+            case 5:
+                // Whatever you want to happen when the thrid item gets selected
+                sessionTxt="2018-2019";
+                break;
+            case 6:
+                // Whatever you want to happen when the thrid item gets selected
+                sessionTxt="2019-2020";
+                break;
+            case 7:
+                // Whatever you want to happen when the thrid item gets selected
+                sessionTxt="2020-2021";
+                break;
+            case 8:
+                // Whatever you want to happen when the thrid item gets selected
+                sessionTxt="2021-2022";
+                break;
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        // TODO Auto-generated method stub
     }
 
 

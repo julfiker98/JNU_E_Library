@@ -104,6 +104,7 @@
 
     <EditText
         android:id="@+id/sessionEt_id"
+        android:visibility="gone"
         android:background="@drawable/forget"
         android:layout_marginTop="10dp"
         android:hint="Enter Session"
@@ -111,6 +112,14 @@
         android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <Spinner
+        android:id="@+id/spinner_id"
+        android:background="@drawable/forget"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"/>
+
     <EditText
         android:id="@+id/passEt_id"
         android:hint="Enter Password"

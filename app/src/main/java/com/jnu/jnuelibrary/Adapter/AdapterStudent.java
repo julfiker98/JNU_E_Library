@@ -91,9 +91,9 @@ public class AdapterStudent extends RecyclerView.Adapter<AdapterStudent.Myholder
             sessionTv = itemView.findViewById(R.id.sessionTv_view);
             deleteTv = itemView.findViewById(R.id.deleteTV_view);
 
-//            if (MainActivity.tag.equals("st")){
-//                deleteTv.setVisibility(View.GONE);
-//            }
+           if (MainActivity.tag.equals("st")){
+               deleteTv.setVisibility(View.GONE);
+           }
 
         }
     }

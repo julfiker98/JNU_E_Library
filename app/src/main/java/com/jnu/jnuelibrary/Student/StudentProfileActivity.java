@@ -30,6 +30,7 @@ public class StudentProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding=ActivityStudentProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        this.setTitle("My Profile");
 
 
         loadStudentInfo();
